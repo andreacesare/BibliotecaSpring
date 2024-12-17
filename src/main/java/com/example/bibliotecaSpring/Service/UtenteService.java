@@ -25,5 +25,28 @@ public class UtenteService {
         return utenteRepository.findAll().stream().map(UtenteConverter::toDTO).toList();
     }
 
+    public UtenteDTO saveUtente(UtenteDTO utenteDTO) {
+        Utente utente = new Utente();
+        utente.setNome(utenteDTO.getNome());
+        utente.setCognome(utenteDTO.getCognome());
+        utenteRepository.save(utente);
+        return UtenteConverter.toDTO(utente);
+    }
+
+    public UtenteDTO updateUtente(int id, UtenteDTO utenteDTO) {
+        Utente utente = utenteRepository.findById(id).orElseThrow(()-> new NoSuchElementException("utente non trovato"));
+        utente.setNome(utenteDTO.getNome());
+        utente.setCognome(utenteDTO.getCognome());
+        utenteRepository.save(utente);
+        return UtenteConverter.toDTO(utente);
+    }
+
+    public UtenteDTO deleteUtente(int id) {
+        Utente utente=utenteRepository.findById(id).orElseThrow(()-> new NoSuchElementException("utente non trovato"));
+
+        utenteRepository.delete(utente);
+        return UtenteConverter.toDTO(utente);
+    }
+
 
 }

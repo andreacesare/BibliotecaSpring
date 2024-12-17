@@ -13,5 +13,14 @@ public class LibroConverter {
         return libroDTO;
     }
 
+    public static Libro toEntity(LibroDTO libroDTO){
+        Libro libro = new Libro();
+        libro.setIdl(libroDTO.getIdl());
+        libro.setAutore(libroDTO.getAutore());
+        libro.setTitolo(libroDTO.getTitolo());
+        return libro;
+
+    }
+
 
 }

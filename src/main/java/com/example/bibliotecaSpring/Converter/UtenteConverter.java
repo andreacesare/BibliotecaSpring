@@ -14,9 +14,12 @@ public class UtenteConverter {
         utenteDTO.setIdu(utente.getIdu());
         utenteDTO.setNome(utente.getNome());
         utenteDTO.setCognome(utente.getCognome());
-        List<PrestitoDTO> prestiti=utente.getPrestiti().stream().map(PrestitoConverter::toDTOwithoutUtente).toList();
-        utenteDTO.setPrestiti(prestiti);
-        return utenteDTO;
+        if (utente.getPrestiti() != null) {
+            List<PrestitoDTO> prestiti = utente.getPrestiti().stream().map(PrestitoConverter::toDTOwithoutUtente).toList();
+            utenteDTO.setPrestiti(prestiti);
+        }
+            return utenteDTO;
+
     }
 
 

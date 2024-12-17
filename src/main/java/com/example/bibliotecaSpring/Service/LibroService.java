@@ -24,4 +24,24 @@ public class LibroService {
     public List<LibroDTO> getAllLibro() {
         return libroRepository.findAll().stream().map(LibroConverter::toDTO).toList();
     }
+
+    public LibroDTO saveLibro(LibroDTO libroDTO) {
+        Libro libro = LibroConverter.toEntity(libroDTO);
+        libroRepository.save(libro);
+        return LibroConverter.toDTO(libro);
+    }
+
+    public LibroDTO updateLibro(String id, LibroDTO libroDTO) {
+        Libro libro=libroRepository.findById(id).orElseThrow(()->new NoSuchElementException("Libro not found"));
+        libro.setAutore(libroDTO.getAutore());
+        libro.setTitolo(libroDTO.getTitolo());
+        libroRepository.save(libro);
+        return LibroConverter.toDTO(libro);
+    }
+
+    public LibroDTO deleteLibro(String id) {
+        Libro libro=libroRepository.findById(id).orElseThrow(()->new NoSuchElementException("Libro not found"));
+        libroRepository.delete(libro);
+        return LibroConverter.toDTO(libro);
+    }
 }

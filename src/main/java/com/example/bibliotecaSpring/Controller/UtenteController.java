@@ -1,11 +1,9 @@
 package com.example.bibliotecaSpring.Controller;
 
 import com.example.bibliotecaSpring.DTO.UtenteDTO;
+import com.example.bibliotecaSpring.Entity.Utente;
 import com.example.bibliotecaSpring.Service.UtenteService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,20 @@ public class UtenteController {
     @GetMapping("")
     public List<UtenteDTO> getAllUtente() {
         return utenteService.getAllUtenti();
+    }
+
+    @PostMapping("/saveUtente")
+    public UtenteDTO saveUtente(@RequestBody UtenteDTO utenteDTO) {
+        return utenteService.saveUtente(utenteDTO);
+    }
+
+    @PutMapping("/updateUtente/{id}")
+    public UtenteDTO updateUtente(@PathVariable("id") Integer id, @RequestBody UtenteDTO utenteDTO) {
+        return utenteService.updateUtente(id, utenteDTO);
+    }
+
+    @DeleteMapping("/deleteUtente/{id}")
+    public  UtenteDTO deleteUtente(@PathVariable("id") Integer id) {
+        return utenteService.deleteUtente(id);
     }
 }

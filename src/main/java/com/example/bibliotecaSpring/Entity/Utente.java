@@ -12,7 +12,7 @@ public class Utente {
     private int idu;
     private String nome;
     private String cognome;
-    @OneToMany(mappedBy = "utente")
+    @OneToMany(mappedBy = "utente",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<Prestito> prestiti;
 
     public int getIdu() {return idu;}

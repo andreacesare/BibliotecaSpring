@@ -11,7 +11,7 @@ public class Libro {
     private String idl;
     private String titolo;
     private String autore;
-    @OneToMany(mappedBy = "libro")
+    @OneToMany(mappedBy = "libro",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<Prestito> prestiti;
 
 
