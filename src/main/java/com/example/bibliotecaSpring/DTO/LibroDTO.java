@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,7 +19,18 @@ public class LibroDTO {
     private String titolo;
     private String autore;
     private List<PrestitoDTO> prestiti;
+    private LocalDate inizio;
+    private LocalDate fine;
 
+    public LibroDTO() {}
+
+    public LibroDTO(String titolo, String autore, LocalDate inizio, LocalDate fine) {
+        this.titolo = titolo;
+        this.autore = autore;
+        this.inizio = inizio;
+        this.fine = fine;
+
+    }
 
     public String getIdl() {return idl;}
     public void setIdl(String idl) {this.idl = idl;}
@@ -32,6 +45,11 @@ public class LibroDTO {
     public void setPrestito(List<PrestitoDTO> prestiti) {
         this.prestiti = prestiti;
     }
+    public LocalDate getInizio() {return inizio;}
+    public void setInizio(LocalDate inizio) {this.inizio = inizio;}
+    public LocalDate getFine() {return fine;}
+    public void setFine(LocalDate fine) {this.fine = fine;}
+
 
     public boolean equals(Object obj) {
         if (this == obj) return true; // Se sono lo stesso oggetto, sono uguali

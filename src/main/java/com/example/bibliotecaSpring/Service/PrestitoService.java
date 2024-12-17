@@ -6,8 +6,12 @@ import com.example.bibliotecaSpring.Entity.Prestito;
 import com.example.bibliotecaSpring.Repository.LibroRepository;
 import com.example.bibliotecaSpring.Repository.PrestitoRepository;
 import com.example.bibliotecaSpring.Repository.UtenteRepository;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -63,9 +67,20 @@ public class PrestitoService {
     }
 
     public PrestitoDTO deletePrestito(Integer id) {
-        Prestito prestito=prestitoRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Prestito id not found"));
+        Prestito prestito = prestitoRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Prestito id not found"));
         prestitoRepository.delete(prestito);
         return PrestitoConverter.toDTO(prestito);
     }
+
+    public List<PrestitoDTO> getPrestiti15gg(){
+        List<PrestitoDTO> lista=prestitoRepository.findAll()
+                .stream()
+                .filter(p->{
+                    LocalDate fine=p.getFine()!=null?p.getFine(): LocalDate.now(); long durata= ChronoUnit.DAYS.between(p.getInizio(),fine); return durata>15;
+                })
+                .map(PrestitoConverter::toDTO).toList();
+        return lista;
+    }
+
 }
 

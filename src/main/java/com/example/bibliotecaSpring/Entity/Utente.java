@@ -9,13 +9,13 @@ import java.util.List;
 public class Utente {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int idu;
+    private Integer idu;
     private String nome;
     private String cognome;
     @OneToMany(mappedBy = "utente",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<Prestito> prestiti;
 
-    public int getIdu() {return idu;}
+    public Integer getIdu() {return idu;}
     public void setIdu(int idu) {this.idu = idu;}
     public String getNome() {return nome;}
     public void setNome(String nome) {this.nome = nome;}

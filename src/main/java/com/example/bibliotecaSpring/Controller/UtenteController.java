@@ -1,6 +1,7 @@
 package com.example.bibliotecaSpring.Controller;
-
+import com.example.bibliotecaSpring.DTO.LibroDTO;
 import com.example.bibliotecaSpring.DTO.UtenteDTO;
+import com.example.bibliotecaSpring.DTO.UtenteLibroDTO;
 import com.example.bibliotecaSpring.Entity.Utente;
 import com.example.bibliotecaSpring.Service.UtenteService;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +39,19 @@ public class UtenteController {
     public  UtenteDTO deleteUtente(@PathVariable("id") Integer id) {
         return utenteService.deleteUtente(id);
     }
+
+//    @GetMapping("/libriNonRientrati")
+//    public List<UtenteDTO> getLibriNonRientrati() {
+//        return utenteService.utentiLibriNrientrati();
+//    }
+    @GetMapping("/libriNonRientrati")
+    public List<UtenteLibroDTO> getLibriNonRientrati() {
+        return utenteService.libriNonRientrati();
+    }
+
+    @GetMapping("/{id}/libri")
+    public List<LibroDTO> getLibri(@PathVariable("id") Integer id) {
+        return utenteService.libriUtente(id);
+    }
+
 }

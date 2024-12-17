@@ -15,6 +15,16 @@ public class PrestitoDTO {
     private LibroDTO libro;
     private UtenteDTO utente;
 
+    public PrestitoDTO() {}
+
+    public PrestitoDTO(String nome,String cognome,String titolo){
+        UtenteDTO utente = new UtenteDTO();
+        LibroDTO libro = new LibroDTO();
+        this.utente.setNome(nome);
+        this.utente.setCognome(cognome);
+        this.libro.setTitolo(titolo);
+    }
+
     public int getIdp(){return idp;}
     public void setIdp(int idp){this.idp = idp;}
     public LocalDate getInizio(){return inizio;}

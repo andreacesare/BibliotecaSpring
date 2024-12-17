@@ -1,6 +1,7 @@
 package com.example.bibliotecaSpring.Controller;
 
 import com.example.bibliotecaSpring.DTO.PrestitoDTO;
+import com.example.bibliotecaSpring.Repository.PrestitoRepository;
 import com.example.bibliotecaSpring.Service.PrestitoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class PrestitoController {
 
     private final PrestitoService prestitoService;
+    private final PrestitoRepository prestitoRepository;
 
-    public PrestitoController(PrestitoService prestitoService) {
+    public PrestitoController(PrestitoService prestitoService, PrestitoRepository prestitoRepository) {
         this.prestitoService = prestitoService;
+        this.prestitoRepository = prestitoRepository;
     }
 
     @GetMapping("/getPrestitoById/{id}")
@@ -38,6 +41,13 @@ public class PrestitoController {
     public PrestitoDTO deletePrestito(@PathVariable("id") Integer id) {
         return prestitoService.deletePrestito(id);
     }
+
+    @GetMapping("/superioreA15gg")
+    public List<PrestitoDTO> superioreA15gg() {
+        return prestitoService.getPrestiti15gg();
+    }
+
+
 
 
 

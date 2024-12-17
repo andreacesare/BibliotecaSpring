@@ -1,7 +1,10 @@
 package com.example.bibliotecaSpring.Controller;
 
 import com.example.bibliotecaSpring.DTO.LibroDTO;
+import com.example.bibliotecaSpring.DTO.PrestitoDTO;
+import com.example.bibliotecaSpring.DTO.UtenteLibroDTO;
 import com.example.bibliotecaSpring.Service.LibroService;
+import com.example.bibliotecaSpring.Service.UtenteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,9 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/libro")
 public class LibroController {
+    private final UtenteService utenteService;
     LibroService libroService;
-    public LibroController(LibroService libroService) {
+    public LibroController(LibroService libroService, UtenteService utenteService) {
         this.libroService = libroService;
+        this.utenteService = utenteService;
     }
 
     @GetMapping("/getLibroById/{id}")
@@ -37,5 +42,12 @@ public class LibroController {
     public LibroDTO deleteLibro(@PathVariable("id") String id) {
         return libroService.deleteLibro(id);
     }
+
+    @GetMapping("/getLibriUtente/{id}")
+    public List<LibroDTO> getLibriUtente(@PathVariable("id") Integer id) {
+        return libroService.libriUtente(id);
+    }
+
+
 
 }
